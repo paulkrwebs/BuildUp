@@ -1,4 +1,4 @@
-﻿namespace ViewModelBuilding.Tests
+﻿namespace BuildUp.Tests
 {
     using Moq;
     using NUnit.Framework;

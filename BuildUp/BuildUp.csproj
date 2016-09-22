@@ -7,8 +7,8 @@
     <ProjectGuid>{97DCDD4A-E038-47EA-8BFD-94AA0D0BDCA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ViewModelBuilding</RootNamespace>
-    <AssemblyName>ViewModelBuilding</AssemblyName>
+    <RootNamespace>BuildUp</RootNamespace>
+    <AssemblyName>BuildUp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Handsey, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Handsey.0.1.0-a0085\lib\net45\Handsey.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Handsey.Utilitites, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Handsey.0.1.0-a0085\lib\net45\Handsey.Utilitites.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

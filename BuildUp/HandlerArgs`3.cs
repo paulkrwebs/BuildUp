@@ -1,4 +1,4 @@
-﻿namespace ViewModelBuilding
+﻿namespace BuildUp
 {
     public class HandlerArgs<TData, TFrom, TTo> : HandlerArgs<TFrom, TTo>
     {

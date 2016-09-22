@@ -1,4 +1,4 @@
-﻿namespace ViewModelBuilding
+﻿namespace BuildUp
 {
     using System.Threading.Tasks;
 

@@ -1,4 +1,4 @@
-﻿namespace ViewModelBuilding
+﻿namespace BuildUp
 {
     public interface IPropertyMapper
     {

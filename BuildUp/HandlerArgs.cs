@@ -1,4 +1,4 @@
-﻿namespace ViewModelBuilding
+﻿namespace BuildUp
 {
     public abstract class HandlerArgs
     {
