@@ -41,11 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentHandlerPipeline.cs" />
     <Compile Include="HandlerArgs`1.cs" />
     <Compile Include="HandlerArgs.cs" />
     <Compile Include="HandlerArgs`2.cs" />
     <Compile Include="HandlerArgs`3.cs" />
     <Compile Include="IContentHandlerPipeline.cs" />
+    <Compile Include="IHandler.cs" />
+    <Compile Include="IHandlerAsync`1.cs" />
+    <Compile Include="IHandlerResolver.cs" />
+    <Compile Include="IHandler`1.cs" />
     <Compile Include="IPropertyMapper.cs" />
     <Compile Include="IViewModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
