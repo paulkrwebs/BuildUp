@@ -1,8 +1,8 @@
 ﻿namespace BuildUp
 {
-    public class HandlerArgs<TData, TFrom, TTo> : HandlerArgs<TFrom, TTo>
+    public class ContentHandlerArgs<TData, TFrom, TTo> : ContentHandlerArgs<TFrom, TTo>
     {
-        public HandlerArgs(TData data, TFrom @from, TTo to)
+        public ContentHandlerArgs(TData data, TFrom @from, TTo to)
             : base(from, to)
         {
             Data = data;

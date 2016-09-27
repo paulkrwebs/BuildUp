@@ -1,6 +1,6 @@
 ﻿namespace BuildUp
 {
-    public interface IHandler<TArgs1> : IHandler
+    public interface IContentHandler<TArgs1> : IContentHandler
     {
         void Handle(TArgs1 arg1);
     }

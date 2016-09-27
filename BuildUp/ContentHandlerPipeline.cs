@@ -5,17 +5,17 @@ namespace BuildUp
 {
     public class ContentHandlerPipeline : IContentHandlerPipeline
     {
-        private readonly IHandlerResolver _handlerResolver;
+        private readonly IContentHandlerResolver _handlerResolver;
 
-        public ContentHandlerPipeline(IHandlerResolver handlerResolver)
+        public ContentHandlerPipeline(IContentHandlerResolver handlerResolver)
         {
             _handlerResolver = handlerResolver;
         }
 
-        public bool Raise<THandlerArgs>(THandlerArgs args)
-            where THandlerArgs : HandlerArgs
+        public bool Raise<TContentHandlerArgs>(TContentHandlerArgs args)
+            where TContentHandlerArgs : ContentHandlerArgs
         {
-            var handlers = _handlerResolver.ResolverAll<IHandler<THandlerArgs>>();
+            var handlers = _handlerResolver.ResolverAll<IContentHandler<TContentHandlerArgs>>();
             bool raised = false;
 
             foreach (var handler in handlers)
@@ -27,9 +27,10 @@ namespace BuildUp
             return raised;
         }
 
-        public async Task<bool> RaiseAsync<THandlerArgs>(THandlerArgs args) where THandlerArgs : HandlerArgs
+        public async Task<bool> RaiseAsync<TContentHandlerArgs>(TContentHandlerArgs args)
+            where TContentHandlerArgs : ContentHandlerArgs
         {
-            var handlers = _handlerResolver.ResolverAll<IHandlerAsync<THandlerArgs>>();
+            var handlers = _handlerResolver.ResolverAll<IContentHandlerAsync<TContentHandlerArgs>>();
             bool raised = false;
 
             foreach (var handler in handlers)

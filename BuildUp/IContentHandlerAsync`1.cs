@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    public interface IHandlerAsync<TArgs1> : IHandler
+    public interface IContentHandlerAsync<TArgs1> : IContentHandler
     {
         Task HandleAsync(TArgs1 arg1);
     }

@@ -18,7 +18,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TToCreate>(to);
+            var args = new ContentHandlerArgs<TToCreate>(to);
             _contentHandlerPipeline.Raise(args);
 
             return to;
@@ -29,7 +29,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TToCreate>(to);
+            var args = new ContentHandlerArgs<TToCreate>(to);
             await _contentHandlerPipeline.RaiseAsync(args);
 
             return to;
@@ -40,7 +40,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TFrom, TToCreate>(@from, to);
+            var args = new ContentHandlerArgs<TFrom, TToCreate>(@from, to);
             var handled = _contentHandlerPipeline.Raise(args);
 
             if (!handled)
@@ -53,7 +53,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
+            var args = new ContentHandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
             var handled = _contentHandlerPipeline.Raise(args);
 
             if (!handled)
@@ -67,7 +67,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TFrom, TToCreate>(@from, to);
+            var args = new ContentHandlerArgs<TFrom, TToCreate>(@from, to);
             var handled = await _contentHandlerPipeline.RaiseAsync(args);
 
             if (!handled)
@@ -80,7 +80,7 @@
         {
             var to = new TToCreate();
 
-            var args = new HandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
+            var args = new ContentHandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
             var handled = await _contentHandlerPipeline.RaiseAsync(args);
 
             if (!handled)

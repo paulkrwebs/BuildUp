@@ -42,15 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentHandlerPipeline.cs" />
-    <Compile Include="HandlerArgs`1.cs" />
-    <Compile Include="HandlerArgs.cs" />
+    <Compile Include="ContentHandlerArgs`1.cs" />
+    <Compile Include="ContentHandlerArgs.cs" />
     <Compile Include="HandlerArgs`2.cs" />
     <Compile Include="HandlerArgs`3.cs" />
     <Compile Include="IContentHandlerPipeline.cs" />
-    <Compile Include="IHandler.cs" />
-    <Compile Include="IHandlerAsync`1.cs" />
-    <Compile Include="IHandlerResolver.cs" />
-    <Compile Include="IHandler`1.cs" />
+    <Compile Include="IContentHandler.cs" />
+    <Compile Include="IContentHandlerAsync`1.cs" />
+    <Compile Include="IContentHandlerResolver.cs" />
+    <Compile Include="IContentHandler`1.cs" />
     <Compile Include="IPropertyMapper.cs" />
     <Compile Include="IViewModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
