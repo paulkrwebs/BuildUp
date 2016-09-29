@@ -1,6 +1,6 @@
 # BuildUp
 
-**NOTE: This Documentation is not complete and the examples have not been compiled yet**
+**NOTE: This Documentation is not complete needs to be re-written so its not EPiServer specific**
 
 Build up is a view model building framwork. It's main aim is to facilitate the modular, decoupled, build up of view models to promote DRY and SOLID practices.
 
@@ -108,6 +108,37 @@ Example registration in structure map
     ConfigurationExpression.For<IContentHandler<HandlerArgs<AContentModel, AViewModel>>>()
                 .Use<ASpecialContentHandler<AContentModel, AViewModel>>()
                 .Named("ASpecialContentHandler");
+
+```
+
+## Calling the View model builer
+
+When the call below is executed the ASpecialContentHandler will be invoked by the BuildUp framework. The example below shows an implementation in the CMS
+
+```c#
+
+    public class ASpecialPageController : PageController<ArticlePage>
+    {
+        #region Constructor
+
+        public ASpecialPageController(IViewModelBuilder viewModelBuilder)
+            : base(viewModelBuilder)
+        {
+        }
+
+        #endregion Constructor
+
+        #region Action Methods
+
+        public ActionResult Index(ASpecialPage currentPage)
+        {
+            var viewModel = ViewModelBuilder.Build<ASpecialPage, AViewModel>(currentPage);
+
+            return View(viewModel);
+        }
+
+        #endregion Action Methods
+    }
 
 ```
 
