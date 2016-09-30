@@ -41,20 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentHandlerPipeline.cs" />
-    <Compile Include="ContentHandlerArgs`1.cs" />
-    <Compile Include="ContentHandlerArgs.cs" />
-    <Compile Include="HandlerArgs`2.cs" />
-    <Compile Include="HandlerArgs`3.cs" />
-    <Compile Include="IContentHandlerPipeline.cs" />
-    <Compile Include="IContentHandler.cs" />
-    <Compile Include="IContentHandlerAsync`1.cs" />
-    <Compile Include="IContentHandlerResolver.cs" />
-    <Compile Include="IContentHandler`1.cs" />
+    <Compile Include="ComponentPipeline.cs" />
+    <Compile Include="ComponentArgs`1.cs" />
+    <Compile Include="ComponentArgs.cs" />
+    <Compile Include="ComponentArgs`2.cs" />
+    <Compile Include="ComponentArgs`3.cs" />
+    <Compile Include="IComponentPipeline.cs" />
+    <Compile Include="IComponent.cs" />
+    <Compile Include="IComponentAsync`1.cs" />
+    <Compile Include="IComponentResolver.cs" />
+    <Compile Include="IComponent`1.cs" />
     <Compile Include="IPropertyMapper.cs" />
-    <Compile Include="IViewModelBuilder.cs" />
+    <Compile Include="IBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelBuilder.cs" />
+    <Compile Include="Builder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

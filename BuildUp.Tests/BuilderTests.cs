@@ -4,13 +4,13 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class ViewModelBuilderTests
+    public class BuilderTests
     {
         #region Fields
 
-        private Mock<IContentHandlerPipeline> _contentHandlerPipeline;
+        private Mock<IComponentPipeline> _componentPipeline;
         private Mock<IPropertyMapper> _propertyMapper;
-        private IViewModelBuilder _viewModelBuilder;
+        private IBuilder _builder;
 
         #endregion Fields
 
@@ -18,45 +18,45 @@
 
         public void Setup()
         {
-            _contentHandlerPipeline = new Mock<IContentHandlerPipeline>();
+            _componentPipeline = new Mock<IComponentPipeline>();
             _propertyMapper = new Mock<IPropertyMapper>();
-            _viewModelBuilder = new ViewModelBuilder(_propertyMapper.Object, _contentHandlerPipeline.Object);
+            _builder = new Builder(_propertyMapper.Object, _componentPipeline.Object);
         }
 
         [Test]
-        public void Build_NoParams_ModelBuiltAndHandlersRaisedOnPipeline()
+        public void Build_NoParams_ModelBuiltAndComponentsRaisedOnPipeline()
         {
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
 
-            _contentHandlerPipeline.Setup(
-                x => x.Raise(It.IsAny<ContentHandlerArgs<ViewModel>>()));
+            _componentPipeline.Setup(
+                x => x.Raise(It.IsAny<ComponentArgs<ViewModel>>()));
 
             // Act
-            ViewModel viewModel = _viewModelBuilder.Build<ViewModel>();
+            ViewModel viewModel = _builder.Build<ViewModel>();
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.Raise(It.IsAny<ContentHandlerArgs<ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel>>()), Times.Once());
         }
 
         [Test]
-        public async void BuildAsync_NoParams_ModelBuiltAndHandlersRaisedOnPipeline()
+        public async void BuildAsync_NoParams_ModelBuiltAndComponentsRaisedOnPipeline()
         {
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
 
-            _contentHandlerPipeline.Setup(
-                x => x.RaiseAsync(It.IsAny<ContentHandlerArgs<ViewModel>>())).ReturnsAsync(true);
+            _componentPipeline.Setup(
+                x => x.RaiseAsync(It.IsAny<ComponentArgs<ViewModel>>())).ReturnsAsync(true);
 
             // Act
-            ViewModel viewModel = await _viewModelBuilder.BuildAsync<ViewModel>();
+            ViewModel viewModel = await _builder.BuildAsync<ViewModel>();
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.RaiseAsync(It.IsAny<ContentHandlerArgs<ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel>>()), Times.Once());
         }
 
         [Test]
@@ -69,15 +69,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.Raise(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>())).Returns(false);
+            _componentPipeline.Setup(
+                x => x.Raise(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>())).Returns(false);
 
             // Act
-            ViewModel viewModel = _viewModelBuilder.Build<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = _builder.Build<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.Raise(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
@@ -91,15 +91,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.RaiseAsync(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>())).ReturnsAsync(false);
+            _componentPipeline.Setup(
+                x => x.RaiseAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>())).ReturnsAsync(false);
 
             // Act
-            ViewModel viewModel = await _viewModelBuilder.BuildAsync<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = await _builder.BuildAsync<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.RaiseAsync(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
@@ -113,15 +113,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.Raise(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>())).Returns(true);
+            _componentPipeline.Setup(
+                x => x.Raise(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>())).Returns(true);
 
             // Act
-            ViewModel viewModel = _viewModelBuilder.Build<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = _builder.Build<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.Raise(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
@@ -135,15 +135,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.RaiseAsync(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>())).ReturnsAsync(true);
+            _componentPipeline.Setup(
+                x => x.RaiseAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>())).ReturnsAsync(true);
 
             // Act
-            ViewModel viewModel = await _viewModelBuilder.BuildAsync<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = await _builder.BuildAsync<EPiServerModel, ViewModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.RaiseAsync(It.IsAny<ContentHandlerArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
@@ -157,15 +157,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.Raise(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>())).Returns(false);
+            _componentPipeline.Setup(
+                x => x.Raise(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>())).Returns(false);
 
             // Act
-            ViewModel viewModel = _viewModelBuilder.Build<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = _builder.Build<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.Raise(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
@@ -179,15 +179,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.RaiseAsync(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>())).ReturnsAsync(false);
+            _componentPipeline.Setup(
+                x => x.RaiseAsync(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>())).ReturnsAsync(false);
 
             // Act
-            ViewModel viewModel = await _viewModelBuilder.BuildAsync<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = await _builder.BuildAsync<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.RaiseAsync(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
@@ -201,15 +201,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.Raise(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>())).Returns(true);
+            _componentPipeline.Setup(
+                x => x.Raise(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>())).Returns(true);
 
             // Act
-            ViewModel viewModel = _viewModelBuilder.Build<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = _builder.Build<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.Raise(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
@@ -223,15 +223,15 @@
             _propertyMapper.Setup(
                 x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
-            _contentHandlerPipeline.Setup(
-                x => x.RaiseAsync(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>())).ReturnsAsync(true);
+            _componentPipeline.Setup(
+                x => x.RaiseAsync(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>())).ReturnsAsync(true);
 
             // Act
-            ViewModel viewModel = await _viewModelBuilder.BuildAsync<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
+            ViewModel viewModel = await _builder.BuildAsync<FormModel, EPiServerModel, ViewModel>(new FormModel() { Step = 1 }, new EPiServerModel() { Title = "MoFo" });
 
             // Assert
             Assert.That(viewModel, Is.Not.Null);
-            _contentHandlerPipeline.Verify(c => c.RaiseAsync(It.IsAny<ContentHandlerArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
+            _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<FormModel, EPiServerModel, ViewModel>>()), Times.Once());
             _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 

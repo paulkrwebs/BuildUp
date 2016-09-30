@@ -1,8 +1,8 @@
 ﻿namespace BuildUp
 {
-    public class ContentHandlerArgs<TFrom, TTo> : ContentHandlerArgs
+    public class ComponentArgs<TFrom, TTo> : ComponentArgs
     {
-        public ContentHandlerArgs(TFrom @from, TTo to)
+        public ComponentArgs(TFrom @from, TTo to)
         {
             From = @from;
             To = to;

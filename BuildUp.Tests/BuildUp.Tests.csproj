@@ -53,9 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContentHandlerPipelineTests.cs" />
+    <Compile Include="ComponentPipelineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModelBuilderTests.cs" />
+    <Compile Include="BuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

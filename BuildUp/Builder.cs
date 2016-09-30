@@ -2,14 +2,14 @@
 {
     using System.Threading.Tasks;
 
-    public class ViewModelBuilder : IViewModelBuilder
+    public class Builder : IBuilder
     {
         private readonly IPropertyMapper _propertyMapper;
-        private readonly IContentHandlerPipeline _contentHandlerPipeline;
+        private readonly IComponentPipeline _componentPipeline;
 
-        public ViewModelBuilder(IPropertyMapper propertyMapper, IContentHandlerPipeline contentHandlerPipeline)
+        public Builder(IPropertyMapper propertyMapper, IComponentPipeline componentPipeline)
         {
-            _contentHandlerPipeline = contentHandlerPipeline;
+            _componentPipeline = componentPipeline;
             _propertyMapper = propertyMapper;
         }
 
@@ -18,8 +18,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TToCreate>(to);
-            _contentHandlerPipeline.Raise(args);
+            var args = new ComponentArgs<TToCreate>(to);
+            _componentPipeline.Raise(args);
 
             return to;
         }
@@ -29,8 +29,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TToCreate>(to);
-            await _contentHandlerPipeline.RaiseAsync(args);
+            var args = new ComponentArgs<TToCreate>(to);
+            await _componentPipeline.RaiseAsync(args);
 
             return to;
         }
@@ -40,8 +40,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TFrom, TToCreate>(@from, to);
-            var handled = _contentHandlerPipeline.Raise(args);
+            var args = new ComponentArgs<TFrom, TToCreate>(@from, to);
+            var handled = _componentPipeline.Raise(args);
 
             if (!handled)
                 _propertyMapper.Map(from, to);
@@ -53,8 +53,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
-            var handled = _contentHandlerPipeline.Raise(args);
+            var args = new ComponentArgs<TData, TFrom, TToCreate>(data, @from, to);
+            var handled = _componentPipeline.Raise(args);
 
             if (!handled)
                 _propertyMapper.Map(from, to);
@@ -67,8 +67,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TFrom, TToCreate>(@from, to);
-            var handled = await _contentHandlerPipeline.RaiseAsync(args);
+            var args = new ComponentArgs<TFrom, TToCreate>(@from, to);
+            var handled = await _componentPipeline.RaiseAsync(args);
 
             if (!handled)
                 _propertyMapper.Map(from, to);
@@ -80,8 +80,8 @@
         {
             var to = new TToCreate();
 
-            var args = new ContentHandlerArgs<TData, TFrom, TToCreate>(data, @from, to);
-            var handled = await _contentHandlerPipeline.RaiseAsync(args);
+            var args = new ComponentArgs<TData, TFrom, TToCreate>(data, @from, to);
+            var handled = await _componentPipeline.RaiseAsync(args);
 
             if (!handled)
                 _propertyMapper.Map(from, to);

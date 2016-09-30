@@ -1,8 +1,8 @@
 ﻿namespace BuildUp
 {
-    public class ContentHandlerArgs<TToHandle> : ContentHandlerArgs
+    public class ComponentArgs<TToHandle> : ComponentArgs
     {
-        public ContentHandlerArgs(TToHandle toHandle)
+        public ComponentArgs(TToHandle toHandle)
         {
             ToHandle = toHandle;
         }
