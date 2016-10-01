@@ -12,10 +12,10 @@ namespace BuildUp
             _componentResolver = componentResolver;
         }
 
-        public bool Raise<TContentHandlerArgs>(TContentHandlerArgs args)
-            where TContentHandlerArgs : ComponentArgs
+        public bool Raise<TComponentArgs>(TComponentArgs args)
+            where TComponentArgs : ComponentArgs
         {
-            var components = _componentResolver.ResolverAll<IComponent<TContentHandlerArgs>>();
+            var components = _componentResolver.ResolverAll<IComponent<TComponentArgs>>();
             bool raised = false;
 
             foreach (var component in components)
