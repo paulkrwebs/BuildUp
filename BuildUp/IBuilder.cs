@@ -10,16 +10,16 @@
         Task<TToCreate> BuildAsync<TToCreate>()
             where TToCreate : new();
 
-        TToCreate Build<TFrom, TToCreate>(TFrom @from)
+        TToCreate Build<TToCreate, TFrom>(TFrom @from)
             where TToCreate : new();
 
-        TToCreate Build<TData, TFrom, TToCreate>(TData data, TFrom @from)
+        TToCreate Build<TToCreate, TFrom, TData>(TFrom @from, TData data)
             where TToCreate : new();
 
-        Task<TToCreate> BuildAsync<TFrom, TToCreate>(TFrom @from)
+        Task<TToCreate> BuildAsync<TToCreate, TFrom>(TFrom @from)
             where TToCreate : new();
 
-        Task<TToCreate> BuildAsync<TData, TFrom, TToCreate>(TData data, TFrom @from)
+        Task<TToCreate> BuildAsync<TToCreate, TFrom, TData>(TFrom @from, TData data)
             where TToCreate : new();
     }
 }
