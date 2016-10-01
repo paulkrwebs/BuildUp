@@ -54,8 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComponentPipelineTests.cs" />
+    <Compile Include="Models\EPiServerModel.cs" />
+    <Compile Include="Models\FormModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuilderTests.cs" />
+    <Compile Include="PropertyMapperComponentTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

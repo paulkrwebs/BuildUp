@@ -1,13 +1,13 @@
 ﻿namespace BuildUp
 {
-    public class ComponentArgs<TTo, TFrom, TData> : ComponentArgs<TTo, TFrom>
+    public class ComponentArgs<TTo, TFrom, TFrom2> : ComponentArgs<TTo, TFrom>
     {
-        public ComponentArgs(TTo to, TFrom @from, TData data)
+        public ComponentArgs(TTo to, TFrom @from, TFrom2 from2)
             : base(to, @from)
         {
-            Data = data;
+            From2 = from2;
         }
 
-        public TData Data { get; private set; }
+        public TFrom2 From2 { get; private set; }
     }
 }

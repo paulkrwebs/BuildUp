@@ -108,7 +108,7 @@
 
         #endregion Tests
 
-        #region Data
+        #region From2
 
         public class EPiServerModel
         {
@@ -120,6 +120,6 @@
             public string Title { get; set; }
         }
 
-        #endregion Data
+        #endregion From2
     }
 }

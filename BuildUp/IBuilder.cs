@@ -13,13 +13,13 @@
         TToCreate Build<TToCreate, TFrom>(TFrom @from)
             where TToCreate : new();
 
-        TToCreate Build<TToCreate, TFrom, TData>(TFrom @from, TData data)
+        TToCreate Build<TToCreate, TFrom, TFrom2>(TFrom @from, TFrom2 from2)
             where TToCreate : new();
 
         Task<TToCreate> BuildAsync<TToCreate, TFrom>(TFrom @from)
             where TToCreate : new();
 
-        Task<TToCreate> BuildAsync<TToCreate, TFrom, TData>(TFrom @from, TData data)
+        Task<TToCreate> BuildAsync<TToCreate, TFrom, TFrom2>(TFrom @from, TFrom2 from2)
             where TToCreate : new();
     }
 }

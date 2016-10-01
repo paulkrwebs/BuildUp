@@ -4,20 +4,17 @@
 
     public class Builder : IBuilder
     {
-        private readonly IPropertyMapper _propertyMapper;
         private readonly IComponentPipeline _componentPipeline;
 
-        public Builder(IPropertyMapper propertyMapper, IComponentPipeline componentPipeline)
+        public Builder(IComponentPipeline componentPipeline)
         {
             _componentPipeline = componentPipeline;
-            _propertyMapper = propertyMapper;
         }
 
         public TToCreate Build<TToCreate>()
            where TToCreate : new()
         {
             var to = new TToCreate();
-
             var args = new ComponentArgs<TToCreate>(to);
             _componentPipeline.Raise(args);
 
@@ -28,7 +25,6 @@
            where TToCreate : new()
         {
             var to = new TToCreate();
-
             var args = new ComponentArgs<TToCreate>(to);
             await _componentPipeline.RaiseAsync(args);
 
@@ -39,27 +35,18 @@
             where TToCreate : new()
         {
             var to = new TToCreate();
-
             var args = new ComponentArgs<TToCreate, TFrom>(to, @from);
             var handled = _componentPipeline.Raise(args);
-
-            // throw exception if no handlers raised?
-            if (!handled)
-                _propertyMapper.Map(from, to);
 
             return to;
         }
 
-        public TToCreate Build<TToCreate, TFrom, TData>(TFrom @from, TData data)
+        public TToCreate Build<TToCreate, TFrom, TFrom2>(TFrom @from, TFrom2 from2)
             where TToCreate : new()
         {
             var to = new TToCreate();
-
-            var args = new ComponentArgs<TToCreate, TFrom, TData>(to, @from, data);
+            var args = new ComponentArgs<TToCreate, TFrom, TFrom2>(to, @from, from2);
             var handled = _componentPipeline.Raise(args);
-
-            if (!handled)
-                _propertyMapper.Map(from, to);
 
             return to;
         }
@@ -68,26 +55,18 @@
             where TToCreate : new()
         {
             var to = new TToCreate();
-
             var args = new ComponentArgs<TToCreate, TFrom>(to, @from);
             var handled = await _componentPipeline.RaiseAsync(args);
-
-            if (!handled)
-                _propertyMapper.Map(from, to);
 
             return to;
         }
 
-        public async Task<TToCreate> BuildAsync<TToCreate, TFrom, TData>(TFrom @from, TData data)
+        public async Task<TToCreate> BuildAsync<TToCreate, TFrom, TFrom2>(TFrom @from, TFrom2 from2)
             where TToCreate : new()
         {
             var to = new TToCreate();
-
-            var args = new ComponentArgs<TToCreate, TFrom, TData>(to, @from, data);
+            var args = new ComponentArgs<TToCreate, TFrom, TFrom2>(to, @from, from2);
             var handled = await _componentPipeline.RaiseAsync(args);
-
-            if (!handled)
-                _propertyMapper.Map(from, to);
 
             return to;
         }

@@ -1,5 +1,6 @@
 ﻿namespace BuildUp.Tests
 {
+    using Models;
     using Moq;
     using NUnit.Framework;
 
@@ -9,7 +10,6 @@
         #region Fields
 
         private Mock<IComponentPipeline> _componentPipeline;
-        private Mock<IPropertyMapper> _propertyMapper;
         private IBuilder _builder;
 
         #endregion Fields
@@ -19,8 +19,7 @@
         public void Setup()
         {
             _componentPipeline = new Mock<IComponentPipeline>();
-            _propertyMapper = new Mock<IPropertyMapper>();
-            _builder = new Builder(_propertyMapper.Object, _componentPipeline.Object);
+            _builder = new Builder(_componentPipeline.Object);
         }
 
         [Test]
@@ -66,9 +65,6 @@
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
 
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
-
             _componentPipeline.Setup(
                 x => x.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>())).Returns(false);
 
@@ -78,7 +74,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
         [Test]
@@ -87,9 +82,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>())).ReturnsAsync(false);
@@ -100,7 +92,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
         [Test]
@@ -109,9 +100,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>())).Returns(true);
@@ -122,7 +110,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
         [Test]
@@ -131,9 +118,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>())).ReturnsAsync(true);
@@ -144,7 +128,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
         [Test]
@@ -153,9 +136,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.Raise(It.IsAny<ComponentArgs<ViewModel, FormModel, EPiServerModel>>())).Returns(false);
@@ -166,7 +146,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
         [Test]
@@ -175,9 +154,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>())).ReturnsAsync(false);
@@ -188,7 +164,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Once());
         }
 
         [Test]
@@ -197,9 +172,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>())).Returns(true);
@@ -210,7 +182,6 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
         [Test]
@@ -219,9 +190,6 @@
             // Arrange
             // The normal "Setup" attribute doesn't work with async methods
             Setup();
-
-            _propertyMapper.Setup(
-                x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()));
 
             _componentPipeline.Setup(
                 x => x.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>())).ReturnsAsync(true);
@@ -232,28 +200,8 @@
             // Assert
             Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
-            _propertyMapper.Verify(x => x.Map(It.IsAny<EPiServerModel>(), It.IsAny<ViewModel>()), Times.Never());
         }
 
         #endregion Tests
-
-        #region Data
-
-        private class EPiServerModel
-        {
-            public string Title { get; set; }
-        }
-
-        private class FormModel
-        {
-            public int Step { get; set; }
-        }
-
-        private class ViewModel
-        {
-            public string Title { get; set; }
-        }
-
-        #endregion Data
     }
 }
