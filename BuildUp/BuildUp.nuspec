@@ -6,8 +6,8 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>https://github.com/paulkrwebs/Handsey.Practices.ViewModelBuilding/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/paulkrwebs/Handsey.Practices.ViewModelBuilding/</projectUrl>
+    <licenseUrl>https://github.com/paulkrwebs/BuildUp/blob/master/README.md</licenseUrl>
+    <projectUrl>https://github.com/paulkrwebs/BuildUp/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
