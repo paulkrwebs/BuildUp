@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BuildUp
 {
-    public class PropertyMapperComponent<TToCreate, TFrom> : IComponent<ComponentArgs<TToCreate, TFrom>>
-        where TToCreate : class, new()
+    public class PropertyMapperComponent<TToBuild, TFrom> : IComponent<ComponentArgs<TToBuild, TFrom>>
+        where TToBuild : class, new()
         where TFrom : class, new()
     {
         #region Fields
@@ -21,8 +21,10 @@ namespace BuildUp
             _propertyMapper = propertyMapper;
         }
 
-        public void Handle(ComponentArgs<TToCreate, TFrom> arg1)
+        public void Handle(ComponentArgs<TToBuild, TFrom> arg1)
         {
+            arg1.ToBuild = arg1.ToBuild ?? new TToBuild();
+
             _propertyMapper.Map(arg1.From, arg1.ToBuild);
         }
     }

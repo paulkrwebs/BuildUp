@@ -9,6 +9,6 @@
 
         public TFrom From { get; private set; }
 
-        public TTo ToBuild { get; private set; }
+        public TTo ToBuild { get; set; }
     }
 }
