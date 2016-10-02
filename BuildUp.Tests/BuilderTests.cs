@@ -36,7 +36,6 @@
             ViewModel viewModel = _builder.Build<ViewModel>();
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel>>()), Times.Once());
         }
 
@@ -54,7 +53,6 @@
             ViewModel viewModel = await _builder.BuildAsync<ViewModel>();
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel>>()), Times.Once());
         }
 
@@ -72,7 +70,6 @@
             ViewModel viewModel = _builder.Build<ViewModel, EPiServerModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
@@ -90,7 +87,6 @@
             ViewModel viewModel = await _builder.BuildAsync<ViewModel, EPiServerModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
@@ -108,7 +104,6 @@
             ViewModel viewModel = _builder.Build<ViewModel, EPiServerModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
@@ -126,7 +121,6 @@
             ViewModel viewModel = await _builder.BuildAsync<ViewModel, EPiServerModel>(new EPiServerModel() { Title = "MoFo" });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
@@ -144,7 +138,6 @@
             ViewModel viewModel = _builder.Build<ViewModel, EPiServerModel, FormModel>(new EPiServerModel() { Title = "MoFo" }, new FormModel() { Step = 1 });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
         }
 
@@ -162,7 +155,6 @@
             ViewModel viewModel = await _builder.BuildAsync<ViewModel, EPiServerModel, FormModel>(new EPiServerModel() { Title = "MoFo" }, new FormModel() { Step = 1 });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
         }
 
@@ -180,7 +172,6 @@
             ViewModel viewModel = _builder.Build<ViewModel, EPiServerModel, FormModel>(new EPiServerModel() { Title = "MoFo" }, new FormModel() { Step = 1 });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.Raise(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
         }
 
@@ -198,7 +189,6 @@
             ViewModel viewModel = await _builder.BuildAsync<ViewModel, EPiServerModel, FormModel>(new EPiServerModel() { Title = "MoFo" }, new FormModel() { Step = 1 });
 
             // Assert
-            Assert.That(viewModel, Is.Not.Null);
             _componentPipeline.Verify(c => c.RaiseAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel, FormModel>>()), Times.Once());
         }
 

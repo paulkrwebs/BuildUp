@@ -23,7 +23,7 @@ namespace BuildUp
 
         public void Handle(ComponentArgs<TToCreate, TFrom> arg1)
         {
-            _propertyMapper.Map(arg1.From, arg1.To);
+            _propertyMapper.Map(arg1.From, arg1.ToBuild);
         }
     }
 }

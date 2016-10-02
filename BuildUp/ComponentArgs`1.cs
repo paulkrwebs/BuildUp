@@ -2,11 +2,10 @@
 {
     public class ComponentArgs<TToHandle> : ComponentArgs
     {
-        public ComponentArgs(TToHandle toHandle)
+        public ComponentArgs()
         {
-            ToHandle = toHandle;
         }
 
-        public TToHandle ToHandle { get; private set; }
+        public TToHandle ToBuild { get; private set; }
     }
 }

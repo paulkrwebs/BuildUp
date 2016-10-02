@@ -29,40 +29,40 @@
         {
             // Arrange
             _componentResolver
-               .Setup(x => x.ResolverAll<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>())
-               .Returns(Enumerable.Empty<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>());
+               .Setup(x => x.ResolverAll<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>())
+               .Returns(Enumerable.Empty<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>());
 
             // Act
-            bool result = _componentPipeline.Raise(new ComponentArgs<EPiServerModel, ViewModel>(new EPiServerModel(), new ViewModel()));
+            bool result = _componentPipeline.Raise(new ComponentArgs<ViewModel, EPiServerModel>(new EPiServerModel()));
 
             // Assert
             Assert.That(result, Is.False);
-            _componentResolver.Verify(x => x.ResolverAll<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>(), Times.Once, "Component resolver was one called");
+            _componentResolver.Verify(x => x.ResolverAll<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>(), Times.Once, "Component resolver was one called");
         }
 
         [Test]
         public void Raise_TComponentsArgs_ComponentsResolvedAndInvoked()
         {
-            Mock<IComponent<ComponentArgs<EPiServerModel, ViewModel>>> Component1 = new Mock<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>();
-            Mock<IComponent<ComponentArgs<EPiServerModel, ViewModel>>> Component2 = new Mock<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>();
+            Mock<IComponent<ComponentArgs<ViewModel, EPiServerModel>>> Component1 = new Mock<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>();
+            Mock<IComponent<ComponentArgs<ViewModel, EPiServerModel>>> Component2 = new Mock<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>();
 
             // Arrange
             _componentResolver
-                .Setup(x => x.ResolverAll<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>())
-                .Returns(new List<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>()
+                .Setup(x => x.ResolverAll<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>())
+                .Returns(new List<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>()
                              {
                                  Component1.Object,
                                  Component2.Object
                              });
 
             // Act
-            bool result = _componentPipeline.Raise(new ComponentArgs<EPiServerModel, ViewModel>(new EPiServerModel(), new ViewModel()));
+            bool result = _componentPipeline.Raise(new ComponentArgs<ViewModel, EPiServerModel>(new EPiServerModel()));
 
             // Assert
             Assert.That(result, Is.True);
-            _componentResolver.Verify(x => x.ResolverAll<IComponent<ComponentArgs<EPiServerModel, ViewModel>>>(), Times.Once, "Component resolver was one called");
-            Component1.Verify(x => x.Handle(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
-            Component2.Verify(x => x.Handle(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentResolver.Verify(x => x.ResolverAll<IComponent<ComponentArgs<ViewModel, EPiServerModel>>>(), Times.Once, "Component resolver was one called");
+            Component1.Verify(x => x.Handle(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
+            Component2.Verify(x => x.Handle(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
         [Test]
@@ -70,40 +70,40 @@
         {
             // Arrange
             _componentResolver
-               .Setup(x => x.ResolverAll<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>())
-               .Returns(Enumerable.Empty<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>());
+               .Setup(x => x.ResolverAll<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>())
+               .Returns(Enumerable.Empty<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>());
 
             // Act
-            bool result = await _componentPipeline.RaiseAsync(new ComponentArgs<EPiServerModel, ViewModel>(new EPiServerModel(), new ViewModel()));
+            bool result = await _componentPipeline.RaiseAsync(new ComponentArgs<ViewModel, EPiServerModel>(new EPiServerModel()));
 
             // Assert
             Assert.That(result, Is.False);
-            _componentResolver.Verify(x => x.ResolverAll<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>(), Times.Once, "Component resolver was one called");
+            _componentResolver.Verify(x => x.ResolverAll<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>(), Times.Once, "Component resolver was one called");
         }
 
         [Test]
         public async void RaiseAsync_TComponentsArgs_ComponentsResolvedAndInvoked()
         {
-            Mock<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>> Component1 = new Mock<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>();
-            Mock<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>> Component2 = new Mock<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>();
+            Mock<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>> Component1 = new Mock<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>();
+            Mock<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>> Component2 = new Mock<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>();
 
             // Arrange
             _componentResolver
-                .Setup(x => x.ResolverAll<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>())
-                .Returns(new List<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>()
+                .Setup(x => x.ResolverAll<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>())
+                .Returns(new List<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>()
                              {
                                  Component1.Object,
                                  Component2.Object
                              });
 
             // Act
-            bool result = await _componentPipeline.RaiseAsync(new ComponentArgs<EPiServerModel, ViewModel>(new EPiServerModel(), new ViewModel()));
+            bool result = await _componentPipeline.RaiseAsync(new ComponentArgs<ViewModel, EPiServerModel>(new EPiServerModel()));
 
             // Assert
             Assert.That(result, Is.True);
-            _componentResolver.Verify(x => x.ResolverAll<IComponentAsync<ComponentArgs<EPiServerModel, ViewModel>>>(), Times.Once, "Component resolver was one called");
-            Component1.Verify(x => x.HandleAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
-            Component2.Verify(x => x.HandleAsync(It.IsAny<ComponentArgs<EPiServerModel, ViewModel>>()), Times.Once());
+            _componentResolver.Verify(x => x.ResolverAll<IComponentAsync<ComponentArgs<ViewModel, EPiServerModel>>>(), Times.Once, "Component resolver was one called");
+            Component1.Verify(x => x.HandleAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
+            Component2.Verify(x => x.HandleAsync(It.IsAny<ComponentArgs<ViewModel, EPiServerModel>>()), Times.Once());
         }
 
         #endregion Tests

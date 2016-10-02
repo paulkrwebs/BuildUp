@@ -20,7 +20,7 @@
         [Test]
         public void Handle_ComponentArgs_PropertyMapperCalled()
         {
-            ComponentArgs<ViewModel, EPiServerModel> args = new ComponentArgs<ViewModel, EPiServerModel>(new ViewModel(), new EPiServerModel());
+            ComponentArgs<ViewModel, EPiServerModel> args = new ComponentArgs<ViewModel, EPiServerModel>(new EPiServerModel());
 
             _propertyMapperComponent.Handle(args);
 

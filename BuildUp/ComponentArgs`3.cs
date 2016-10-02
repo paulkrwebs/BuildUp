@@ -2,8 +2,8 @@
 {
     public class ComponentArgs<TTo, TFrom, TFrom2> : ComponentArgs<TTo, TFrom>
     {
-        public ComponentArgs(TTo to, TFrom @from, TFrom2 from2)
-            : base(to, @from)
+        public ComponentArgs(TFrom @from, TFrom2 from2)
+            : base(@from)
         {
             From2 = from2;
         }
