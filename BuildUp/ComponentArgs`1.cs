@@ -6,6 +6,6 @@
         {
         }
 
-        public TToHandle ToBuild { get; private set; }
+        public TToHandle ToBuild { get; set; }
     }
 }
